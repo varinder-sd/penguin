@@ -1,0 +1,12 @@
+http://127.0.0.1:8000/api/login
+
+http://127.0.0.1:8000/api/logout/
+
+http://127.0.0.1:8000/api/signup
+
+
+https://crm.websitevalley.us/api/penguin/api/login
+
+https://crm.websitevalley.us/api/penguin/api/signup
+
+https://crm.websitevalley.us/api/penguin/api/logout

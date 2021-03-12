@@ -1,0 +1,58 @@
+
+
+PENGUIN APP DOC
+
+
+#INSTALL LARAVLE
+composer create-project laravel/laravel penguin
+
+#INSTALL SANCTUM
+composer require laravel/sanctum
+
+#PUBLISH VENDOR SANCTUM TO CONFIG
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+#SNACTUM API TOKEN TABLE MIGRATION
+php artisan migrate
+
+#ADD SANCTUM MIDDLEWARE  (app/Http/Kernel.php )
+in  $middlewareGroups to API array ->   \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+
+#ADD THE HASAPITOKENS TRAIT INSIDE THE USER MODEL.(app/model/User.php)
+use HasApiTokens, Notifiable;
+
+#CREATE SEEDER FOR USER MODEL
+php artisan make:seeder UsersTableSeeder
+
+# INSERT A NEW USER BY SEEDER COMMAND ( place user create code in UsersTableSeeder file )
+php artisan db:seed --class=UsersTableSeeder
+
+#CREATE AUTHCONTROLLER FOR LOGIN
+php artisan make:controller AuthController
+
+#CREATE USERCONTROLLER FOR USERS lIST
+php artisan make:controller UserController
+
+#CREATE NEW TABLE FOR USER EXTRA DETAILS
+php artisan make:migration create_user_profiles_table
+
+#REGISTER API In AUTH CONTROLLER
+
+#LOGIN AND LOGOUT API IN AUTH CONTROLLER
+
+#INSTALLED ADMIN PANEL
+composer require tcg/voyager
+php artisan voyager:install
+php artisan voyager:install
+php artisan voyager:admin varinder@smartdesizns.co.in --create
+
+
+
+
+
+#Installed Admin Panel
+
+
+
+
+https://laravel.io/forum/06-11-2014-how-to-access-additional-user-information-stored-in-another-table?page=1
