@@ -70,12 +70,13 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function update(Request $request, $id){
+		
         $plan = Plan::findOrFail($id);
  
-        $request->validate($request, array(
-					'name' => 'required',
+              $request->validate([
+			 'name' => 'required',
 					'price' => 'required',
-					));
+			]);
  
         $input = $request->all();
  

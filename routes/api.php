@@ -24,25 +24,15 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/user', function (Request $request) {
 		return $request->user();
 	});
-	//Route::post('/logout', [App\Http\Controllers\AuthController::class,'logout']);
 	Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
 });
 
 
 
-// Route::get('create', function() {
-   // return  \App\Models\User::create(array(
-		// 'name' => 'Arun',
-		// 'email' => 'arun@smartdesizns.co.in',
-		// 'password' => Hash::make('123456')
-		
-   // ));
-// });
-
-Route::get('countries', function() {
+Route::get('add_countries', function() {
 	
 
-$countries = json_decode(file_get_contents(dirname(dirname(__FILE__ )). '\vendor\webpatser\laravel-countries\src\Webpatser\Countries\Models\countries.json'), true);
+$countries = json_decode(file_get_contents(dirname(dirname(__FILE__ )). '/countries.json'), true);
 
  $validSorts = [
             'capital',
@@ -109,6 +99,15 @@ Route::get('countries', function() {
     return response()->json([
 	  'status_code' => 200,
 	  'countries' => $countries,
+	]);
+});
+
+Route::get('plans', function() {
+	
+	$plans = \App\Models\Plan::all();
+    return response()->json([
+	  'status_code' => 200,
+	  'plans' => $plans,
 	]);
 });
 

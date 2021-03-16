@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d0e5df5fa1cf4ec68b9ab1046a16ac7",
+    "content-hash": "582ee0d3b51d4cb50c57a34b64a33159",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -2812,16 +2812,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.10.6",
+            "version": "v0.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "6f990c19f91729de8b31e639d6e204ea59f19cf3"
+                "reference": "a395af46999a12006213c0c8346c9445eb31640c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/6f990c19f91729de8b31e639d6e204ea59f19cf3",
-                "reference": "6f990c19f91729de8b31e639d6e204ea59f19cf3",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/a395af46999a12006213c0c8346c9445eb31640c",
+                "reference": "a395af46999a12006213c0c8346c9445eb31640c",
                 "shasum": ""
             },
             "require": {
@@ -2880,7 +2880,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2021-01-18T15:53:43+00:00"
+            "time": "2021-03-14T02:14:56+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -3111,84 +3111,6 @@
                 "promises"
             ],
             "time": "2020-05-12T15:16:56+00:00"
-        },
-        {
-            "name": "rinvex/countries",
-            "version": "v6.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rinvex/countries.git",
-                "reference": "0dd9da817c1faa33429fe56b8ba059fdabe6e0fe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rinvex/countries/zipball/0dd9da817c1faa33429fe56b8ba059fdabe6e0fe",
-                "reference": "0dd9da817c1faa33429fe56b8ba059fdabe6e0fe",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2.0"
-            },
-            "require-dev": {
-                "codedungeon/phpunit-result-printer": "^0.26.0",
-                "laravel/helpers": "^1.1.0",
-                "phpunit/phpunit": "^8.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Rinvex\\Country\\Providers\\CountryServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Rinvex\\Country\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rinvex LLC",
-                    "email": "help@rinvex.com",
-                    "homepage": "https://rinvex.com"
-                },
-                {
-                    "name": "Abdelrahman Omran",
-                    "email": "me@omranic.com",
-                    "homepage": "https://omranic.com",
-                    "role": "Project Lead"
-                },
-                {
-                    "name": "The Generous PHP Community",
-                    "homepage": "https://github.com/rinvex/countries/contributors"
-                }
-            ],
-            "description": "Rinvex Countries is a simple and lightweight package for retrieving country details with flexibility. A whole bunch of data including name, demonym, capital, iso codes, dialling codes, geo data, currencies, flags, emoji, and other attributes for all 250 countries worldwide at your fingertips.",
-            "homepage": "https://rinvex.com",
-            "keywords": [
-                "Flexible",
-                "Simple",
-                "countries",
-                "country",
-                "currencies",
-                "demonym",
-                "dialling",
-                "emoji",
-                "flags",
-                "geographic",
-                "languages",
-                "rinvex",
-                "svg"
-            ],
-            "time": "2020-03-13T18:04:45+00:00"
         },
         {
             "name": "seld/jsonlint",
@@ -5387,68 +5309,6 @@
                 "validate"
             ],
             "time": "2021-03-09T10:59:23+00:00"
-        },
-        {
-            "name": "webpatser/laravel-countries",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webpatser/laravel-countries.git",
-                "reference": "9d656c32c3d92333ab00bd87761e8cd1f7245fb3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webpatser/laravel-countries/zipball/9d656c32c3d92333ab00bd87761e8cd1f7245fb3",
-                "reference": "9d656c32c3d92333ab00bd87761e8cd1f7245fb3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Webpatser\\Countries\\CountriesServiceProvider"
-                    ],
-                    "aliases": {
-                        "Countries": "Webpatser\\Countries\\CountriesFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Webpatser\\Countries": "src/"
-                },
-                "classmap": [
-                    "src/commands"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christoph Kempen",
-                    "email": "christoph@downsized.nl",
-                    "homepage": "http://downsized.nl/",
-                    "role": "developer"
-                },
-                {
-                    "name": "Paul Kievits",
-                    "role": "developer"
-                }
-            ],
-            "description": "Laravel Countries is a bundle for Laravel, providing Almost ISO 3166_2, 3166_3, currency, Capital and more for all countries.",
-            "homepage": "https://github.com/webpatser/laravel-countries",
-            "keywords": [
-                "countries",
-                "iso_3166_2",
-                "iso_3166_3",
-                "laravel"
-            ],
-            "time": "2019-07-12T14:06:05+00:00"
         }
     ],
     "packages-dev": [
@@ -7592,9 +7452,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "webpatser/laravel-countries": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

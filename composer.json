@@ -15,7 +15,6 @@
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.9",
         "laravel/tinker": "^2.5",
-        "rinvex/countries": "^6.1",
         "tcg/voyager": "^1.4"
     },
     "require-dev": {

@@ -19,7 +19,7 @@
         @include('voyager::alerts')
 		@if(Session::has('flash_message'))
 		<div class="alert alert-success">
-            <div style="color:green; border:1px solid #aaa; padding:4px; margin-top:10px">
+            <div>
                 {{ Session::get('flash_message') }}
             </div>
 		</div>
@@ -27,7 +27,7 @@
  
         @if($errors->any())
 	<div class="alert alert-danger">	
-            <div style="color:red; border:1px solid #aaa; padding:4px; margin-top:10px">
+            <div>
                 @foreach($errors->all() as $error)
                     <p>{{ $error }}</p>
                 @endforeach
@@ -48,7 +48,7 @@
 @endif" method="POST" enctype="multipart/form-data" autocomplete="off">
 						<!-- PUT Method if we are editing -->
 						 {{ csrf_field() }}
-
+							@method('PATCH')
 						<div class="row">
 							<div class="col-md-8">
 								<div class="panel panel-bordered">
@@ -62,7 +62,7 @@
 
 										<div class="form-group">
 											<label for="Price">Price</label>
-											<input type="text" class="form-control" id="Price" name="price" placeholder="Price" value="@if(isset($plan->price)) {{ $plan->price }} @endif">
+											<input type="text" class="form-control" id="Price" name="price" placeholder="Price" value="@if(isset($plan->price)){{$plan->price}}@endif">
 										</div>
 
 										<div class="form-group">
@@ -80,7 +80,7 @@
 
 						
 						</div>
-
+						
 						<button type="submit" class="btn btn-primary pull-right save">
 							Save
 						</button>
