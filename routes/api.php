@@ -18,17 +18,38 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::post('/signup', 'App\Http\Controllers\AuthController@register'); // Signup
-//Route::post('/user_login', 'App\Http\Controllers\UserController@login');
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/user', function (Request $request) {
 		return $request->user();
 	});
 	Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
+	
+	
+	Route::get('/plans', function (Request $request) {
+       // return $request->user();
+		$plans = \App\Models\Plan::all();
+		return response()->json([
+		  'status_code' => 200,
+		  'plans' => $plans,
+		]);
+    });
+	
+	Route::post('/subscription', 'App\Http\Controllers\SubscriptionController@create')->name('subscription.create');
+	
+});
+
+Route::get('countries', function() {
+	
+	$countries = \App\Models\Country::all();
+    return response()->json([
+	  'status_code' => 200,
+	  'countries' => $countries,
+	]);
 });
 
 
-
+//this code should be at last Please every route above this line
 Route::get('add_countries', function() {
 	
 
@@ -92,23 +113,3 @@ foreach ($countries as $countryId => $country){
         }
 
 });
-
-Route::get('countries', function() {
-	
-	$countries = \App\Models\Country::all();
-    return response()->json([
-	  'status_code' => 200,
-	  'countries' => $countries,
-	]);
-});
-
-Route::get('plans', function() {
-	
-	$plans = \App\Models\Plan::all();
-    return response()->json([
-	  'status_code' => 200,
-	  'plans' => $plans,
-	]);
-});
-
-

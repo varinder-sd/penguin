@@ -148,7 +148,7 @@ window.onload = function () {
 										<td>{{ $row->id }}</td>
 										<td>{{ $row->name }}</td>
 									
-										<td>{{ $row->price }}</td>
+										<td>{{ $row->cost }}</td>
 										<td>
 										<label class="switch">
 											<input  type="checkbox" class="status" data-id="{{ $row->id }}" name="status" @if($row->status) checked @endif>

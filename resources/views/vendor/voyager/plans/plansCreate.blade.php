@@ -48,7 +48,9 @@
 @endif" method="POST" enctype="multipart/form-data" autocomplete="off">
 						<!-- PUT Method if we are editing -->
 						 {{ csrf_field() }}
-							@method('PATCH')
+						@if($title =='Edit Plan')
+						@method('PATCH')
+						@endif
 						<div class="row">
 							<div class="col-md-8">
 								<div class="panel panel-bordered">
@@ -57,17 +59,36 @@
 									<div class="panel-body">
 										<div class="form-group">
 											<label for="name">Name</label>
-											<input type="text" class="form-control" id="name" name="name" placeholder="Name" value="@if(isset($plan->name)) {{ $plan->name }} @endif">
+											<input type="text" class="form-control" id="name" name="name" placeholder="Name" value="@isset($plan->name){{ $plan->name }}@endisset">
 										</div>
 
 										<div class="form-group">
 											<label for="Price">Price</label>
-											<input type="text" class="form-control" id="Price" name="price" placeholder="Price" value="@if(isset($plan->price)){{$plan->price}}@endif">
+											<input type="text" class="form-control" id="Price" name="price" placeholder="Price" value="@isset($plan->price){{$plan->price}}@endisset">
+										</div>
+										<div class="form-group">
+											<label for="currency">Currency</label>
+										
+											<select name="currency" class="form-control">
+												<option value="USD" @if(isset($plan->currency) && $plan->currency == 'USD') {{ "selected" }} @endif>USD</option>
+												<option value="INR" @if(isset($plan->currency) && $plan->currency == 'INR') {{ "selected" }} @endif>INR</option>
+											</select>
+											
+										</div>
+										
+										<div class="form-group">
+											<label for="description">Description</label>
+											
+			
+											
+											<textarea name="description" class="form-control">@isset($plan->description){{ $plan->description }}
+											@endisset</textarea>
+											
 										</div>
 
-										<div class="form-group">
+										<div class="form-group"> 
 											<label for="active">Active
-											<input type="radio" class="form-control st" id="active" name="status" value="1"@if(isset($plan->status) && $plan->status == 1) {{ "checked" }} @endif></label>
+											<input type="radio" class="form-control st" id="active" name="status" value="1" @if(isset($plan->status) && $plan->status == 1) {{ "checked" }} @endif></label>
 											<label for="inactive">
 											inactive<input type="radio" class="form-control st" id="inactive" name="status"value="0" @if(isset($plan->status) && $plan->status == 0) {{ "checked" }} @endif></label>
 										</div>

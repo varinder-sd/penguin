@@ -8,9 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Plan extends Model
 {
     use HasFactory;
-	protected $fillable = [
+    protected $fillable = [
         'name',
-        'price',
+        'slug',
+        'stripe_plan',
+        'cost',
+        'description',
 		'status'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

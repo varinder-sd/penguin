@@ -13,14 +13,19 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-		//Schema::subscriptions('plans');
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id();
-			$table->unsignedBigInteger('user_id');
-			$table->unsignedBigInteger('plan_id');
-			$table->unsignedBigInteger('transc_id')
-			$table->enum('status', array('1', '0'));
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->string('stripe_id');
+            $table->string('stripe_status');
+            $table->string('stripe_plan')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->timestamp('trial_ends_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
             $table->timestamps();
+
+            $table->index(['user_id', 'stripe_status']);
         });
     }
 

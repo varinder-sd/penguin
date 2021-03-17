@@ -47,6 +47,30 @@ php artisan voyager:install
 php artisan voyager:admin varinder@smartdesizns.co.in --create
 
 
+#CREATED PLANS IN ADMIN PANEL
+CREATED : MODEL , CONTROLLER , SEEDER 
+php artisan make:migration create_plans_table
+php artisan migrate:refresh --path=database/migrations/2021_03_16_074109_create_plans_table.php
+
+
+
+
+#CREATED COUNTRIES
+CREATED : MODEL , CONTROLLER , SEEDER 
+
+
+#INTEGRATED STRIPE CASHIER
+ composer require laravel/cashier
+
+#CREATED SUBSCRIPTIONS
+ php artisan migrate
+php artisan vendor:publish --tag="cashier-migrations"
+https://medium.com/fabcoding/laravel-7-create-a-subscription-system-using-cashier-stripe-77cdf5c8ea5d
+https://blog.codehunger.in/laravel-stripe-subscription-using-cashier-in-laravel-7/
+php artisan make:middleware Subscribed
+
+
+
 
 
 

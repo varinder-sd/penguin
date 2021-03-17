@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlansTable extends Migration
+class CreateSubscriptionItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
-		Schema::dropIfExists('plans');
-		Schema::create('plans', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
+        Schema::create('subscription_items', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('subscription_id');
+            $table->string('stripe_id')->index();
             $table->string('stripe_plan');
-            $table->float('cost');
-            $table->text('description')->nullable();
-			$table->enum('status', array('1', '0'));
+            $table->integer('quantity')->nullable();
             $table->timestamps();
+
+            $table->unique(['subscription_id', 'stripe_plan']);
         });
     }
 
@@ -33,6 +32,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('subscription_items');
     }
 }
