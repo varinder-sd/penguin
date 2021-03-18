@@ -23,16 +23,74 @@ class SubscriptionController extends Controller
         $this->stripe = new \Stripe\StripeClient($key);
     }
 
+	public function checkUserSubscription(Request $request) {
+		$user = $request->user();
+		
+		if ($user->subscribed()) {
+			$sub = $user->subscription('default')->asStripeSubscription();
+			return response()->json([
+			'status_code' => 200,
+			'message' => "You have already subscribed",
+			'subscription' => $sub
+			]);
+		}else{
+			return response()->json([
+			'status_code' => 200,
+			'message' => "You have no active plan yet.",
+			]);
+		}
+	}
+	
+	public function retrievePlans() {
+       $key = \config('services.stripe.secret');
+       $stripe = new \Stripe\StripeClient($key);
+       $plansraw = $stripe->plans->all();
+       $plans = $plansraw->data;
+		$plan =  $stripe->plans->retrieve(
+		  'plan_J8DbbUswidVpYN',
+		  []
+		);
+		$stripe->plans->update(
+		  'plan_J8DbbUswidVpYN',
+		  ['amount' => 2000]
+		);
+       print_r($plan); die;
+       // foreach($plans as $plan) {
+           // $prod = $stripe->products->retrieve(
+               // $plan->product,[]
+           // );
+           // $plan->product = $prod;
+       // }
+	   
+	 $plan =  $stripe->products->retrieve(
+		  'prod_J8DbR9rxQY7Ihc',
+		  []
+		);
+	   
+	   print_r($plan);
+      /// return $plans;
+   }
+	
+	
     public function create(Request $request, Plan $plan)
     {
+		$user = $request->user();
+		
+		if ($user->subscribed()) {
+			return response()->json([
+			'status_code' => 500,
+			'message' => "You have already subscribed",
+			]);
+		}
+		
         $plan = Plan::findOrFail($request->get('plan'));
-        
-        $user = $request->user();
+        		
         $paymentMethod = $request->paymentMethod;
-
 		
         $user->createOrGetStripeCustomer();
         $user->updateDefaultPaymentMethod($paymentMethod);
+		
+			
         $user->newSubscription('default', $plan->stripe_plan)
             ->create($paymentMethod, [
                 'email' => $user->email,
@@ -42,7 +100,7 @@ class SubscriptionController extends Controller
 			
 			return response()->json([
 			'status_code' => 200,
-			'subscription' => $subscriptions,
+			'message' => "Your plan subscribed successfully",
 			]);
 		} else {
 			
