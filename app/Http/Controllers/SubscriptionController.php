@@ -23,16 +23,23 @@ class SubscriptionController extends Controller
         $this->stripe = new \Stripe\StripeClient($key);
     }
 
-	public function checkUserSubscription(Request $request) {
+	public function userSubscription(Request $request) {
 		$user = $request->user();
 		
 		if ($user->subscribed()) {
-			$sub = $user->subscription('default')->asStripeSubscription();
+		$sub = $user->subscription('default')->asStripeSubscription();
+    
+          $planId = $sub['items']['data'][0]->plan->id; 
+         
+          $plan =$plan = Plan::where('stripe_plan',$planId)->first();
+		
 			return response()->json([
 			'status_code' => 200,
-			'message' => "You have already subscribed",
-			'subscription' => $sub
+			'message' => "your subscription data",
+			'subscription' => $sub,
+              'plan'=>$plan
 			]);
+			
 		}else{
 			return response()->json([
 			'status_code' => 200,
