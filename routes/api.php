@@ -38,11 +38,20 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 	Route::post('/subscription', 'App\Http\Controllers\SubscriptionController@create')->name('subscription.create');
 	Route::get('/user-subscription', 'App\Http\Controllers\SubscriptionController@userSubscription')->name('subscription.user');
 	
+
+	Route::post('/upgrade-plan', 'App\Http\Controllers\SubscriptionController@planUpgrade')->name('subscription.upgrade');
+	
+	
 	Route::get('/cancel-subscription', function(Request $request){
 		$user = $request->user();
 		$user->subscription('default')->cancel();
+		
+		return response()->json([
+			'status_code' => 200,
+			'message' => "Your subscription plan has been cancelled.",
+		]);
 
-	});
+	})->name('subscription.cancel');
 	
 });
 
