@@ -37,6 +37,13 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 	
 	Route::post('/subscription', 'App\Http\Controllers\SubscriptionController@create')->name('subscription.create');
 	Route::get('/user-subscription', 'App\Http\Controllers\SubscriptionController@userSubscription')->name('subscription.user');
+	
+	Route::get('/cancel-subscription', function(Request $request){
+		$user = $request->user();
+		$user->subscription('default')->cancel();
+
+	});
+	
 });
 
 Route::get('/planAll', 'App\Http\Controllers\SubscriptionController@retrievePlans')->name('subscription.plans');
