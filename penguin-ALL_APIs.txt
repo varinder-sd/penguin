@@ -1,0 +1,31 @@
+
+
+
+/api/login
+/api/signup
+/api/logout
+/api/countries
+/api/plans
+/api/subscription
+/api/cancel-subscription
+/api/user-subscription
+/api/plan-upgrade
+
+
+
+
+
+
+	try
+	{
+		string Url = "https://mywealthgrowth.com/FundAPI/ListAllFunds";
+		WebRequest request = WebRequest.Create(Url); ////////// Read data from web path 
+		request.Headers.Add("AuthCode", "test@123"); ///// Replace test@123 with Auth code shared seperately
+		HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+		StreamReader reader = new StreamReader(response.GetResponseStream());
+		string fullResponse = reader.ReadToEnd();
+	}
+	catch (Exception Ex)
+	{
+		////////////// Handle Exception Code 
+	}
