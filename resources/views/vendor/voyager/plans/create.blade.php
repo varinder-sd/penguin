@@ -55,6 +55,26 @@
                     <label for="cost">Plan Description:</label>
                     <input type="text" class="form-control" name="description" placeholder="Enter Description">
                 </div>
+				<div class="form-group">
+					<label>Currency</label>
+
+					<select name="currency" class="form-control">
+					<option value="usd">USD</option>
+					<option value="inr">INR</option>
+					</select>
+
+				</div>
+				<div class="form-group">
+					<label>Billing period</label>
+
+					<select name="billing_period" class="form-control">
+					<option value="day">Daily</option>
+					<option value="week">Weekly</option>
+					<option value="month">Monthly</option>
+					<option value="year">Yearly</option>
+					</select>
+
+				</div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
                     </div>

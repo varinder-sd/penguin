@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Cashier\Billable;
+
 use Laravel\Cashier\Contracts\Billable as BillableContract;
 class User extends \TCG\Voyager\Models\User 
 {
@@ -45,7 +46,7 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-	
+	protected $dates = ['trial_ends_at', 'subscription_ends_at'];
 	public function UserProfile()
     {
         return $this->hasOne('App\Models\UserProfile');

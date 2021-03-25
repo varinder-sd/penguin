@@ -65,13 +65,18 @@ CREATED : MODEL , CONTROLLER , SEEDER
 #CREATED SUBSCRIPTIONS
  php artisan migrate
 php artisan vendor:publish --tag="cashier-migrations"
-https://medium.com/fabcoding/laravel-7-create-a-subscription-system-using-cashier-stripe-77cdf5c8ea5d
+
 https://blog.codehunger.in/laravel-stripe-subscription-using-cashier-in-laravel-7/
 php artisan make:middleware Subscribed
+expertphp.in/article/monthly-subscription-app-using-stripe-cashier-and-laravel-5-4-with-example
 
 
 
-
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+composer dump-autoload
 
 
 #Installed Admin Panel

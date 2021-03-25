@@ -65,6 +65,9 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+b, optgroup, strong {
+    font-weight: bold;
+}
     </style>
 @stop
 
@@ -145,10 +148,10 @@ window.onload = function () {
 								@foreach($plans as $row)
 									<tr>
 										<td><input type="checkbox"></td>
-										<td>{{ $row->id }}</td>
+										<td>{{ $loop->iteration }}</td>
 										<td>{{ $row->name }}</td>
 									
-										<td>{{ $row->cost }}</td>
+										<td>{{ $row->cost }} <strong>{{ Str::upper($row->currency) }}</strong></td>
 										<td>
 										<label class="switch">
 											<input  type="checkbox" class="status" data-id="{{ $row->id }}" name="status" @if($row->status) checked @endif>

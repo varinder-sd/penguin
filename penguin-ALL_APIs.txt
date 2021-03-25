@@ -1,12 +1,31 @@
-http://127.0.0.1:8000/api/login
-
-http://127.0.0.1:8000/api/logout/
-
-http://127.0.0.1:8000/api/signup
 
 
-https://crm.websitevalley.us/api/penguin/api/login
 
-https://crm.websitevalley.us/api/penguin/api/signup
+/api/login
+/api/signup
+/api/logout
+/api/countries
+/api/plans
+/api/subscription
+/api/cancel-subscription
+/api/user-subscription
+/api/plan-upgrade
 
-https://crm.websitevalley.us/api/penguin/api/logout
+
+
+
+
+
+	try
+	{
+		string Url = "https://mywealthgrowth.com/FundAPI/ListAllFunds";
+		WebRequest request = WebRequest.Create(Url); ////////// Read data from web path 
+		request.Headers.Add("AuthCode", "test@123"); ///// Replace test@123 with Auth code shared seperately
+		HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+		StreamReader reader = new StreamReader(response.GetResponseStream());
+		string fullResponse = reader.ReadToEnd();
+	}
+	catch (Exception Ex)
+	{
+		////////////// Handle Exception Code 
+	}

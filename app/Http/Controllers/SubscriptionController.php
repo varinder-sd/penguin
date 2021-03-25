@@ -3,11 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-
-
-
-
-//use Request;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,30 +21,84 @@ class SubscriptionController extends Controller
 	public function userSubscription(Request $request) {
 		$user = $request->user();
 		
+      	$is_cancelled = 0;
+        
+      	if ($user->subscription('default')->cancelled()) {
+   
+			$is_cancelled = 1;
+		}
+	
 		if ($user->subscribed()) {
-		$sub = $user->subscription('default')->asStripeSubscription();
+          
+          if ($user->hasPaymentMethod()) {
+         	 $card_digits = $user->card_last_four;
+          
+          }else{
+			 $card_digits = 0;	
+          }
+		
+          $sub = $user->subscription('default')->asStripeSubscription();
     
           $planId = $sub['items']['data'][0]->plan->id; 
          
-          $plan =$plan = Plan::where('stripe_plan',$planId)->first();
-		
+          	$plan = Plan::where('stripe_plan',$planId)->first();
+			$plan['card_digits'] =  $card_digits;
 			return response()->json([
 			'status_code' => 200,
 			'message' => "your subscription data",
 			'subscription' => $sub,
-              'plan'=>$plan
+            'is_cancelled'=>$is_cancelled,
+            'plan'=>$plan,                        
 			]);
 			
 		}else{
 			return response()->json([
+			'status_code' => 400,
+			'message' => "You have no active plan yet.",
+			]);
+		}
+	}
+	
+	public function resumeSubscription(Request $request){
+		$user = $request->user();
+		$subscription = $user->subscription('default')
+		if($subscription->cancelled() && $subscription->onGracePeriod()) { 
+			//if it was cancelled by user in grace period
+			$subscription->resume();
+			return response()->json([
+				'status_code' => 200,
+				'message' => "You have no active plan yet.",
+			]);
+		}else{
+			return response()->json([
+				'status_code' => 400,
+				'message' => "You have to purchase plan again.",
+			]);
+		}
+	}
+	public function planUpgrade(Request $request) {
+		$user = $request->user();
+		
+       $plan = $request->plan_id;
+		if ($user->subscribed()) {	
+		
+			$user->subscription('default')->swapAndInvoice($plan);
+
+			return response()->json([
 			'status_code' => 200,
+			'message' => "your subscription plan upgraded",
+			]);
+			
+		}else{
+			return response()->json([
+			'status_code' => 500,
 			'message' => "You have no active plan yet.",
 			]);
 		}
 	}
 	
 	public function retrievePlans() {
-       $key = \config('services.stripe.secret');
+       /* $key = \config('services.stripe.secret');
        $stripe = new \Stripe\StripeClient($key);
        $plansraw = $stripe->plans->all();
        $plans = $plansraw->data;
@@ -61,21 +110,14 @@ class SubscriptionController extends Controller
 		  'plan_J8DbbUswidVpYN',
 		  ['amount' => 2000]
 		);
-       print_r($plan); die;
-       // foreach($plans as $plan) {
-           // $prod = $stripe->products->retrieve(
-               // $plan->product,[]
-           // );
-           // $plan->product = $prod;
-       // }
-	   
-	 $plan =  $stripe->products->retrieve(
+		print_r($plan); die;	   
+		$plan =  $stripe->products->retrieve(
 		  'prod_J8DbR9rxQY7Ihc',
 		  []
 		);
 	   
 	   print_r($plan);
-      /// return $plans;
+       return $plans; */
    }
 	
 	
@@ -125,6 +167,8 @@ class SubscriptionController extends Controller
 
     public function storePlan(Request $request)
     {   
+	
+	
         $data = $request->except('_token');
 
         $data['slug'] = strtolower($data['name']);
@@ -138,8 +182,8 @@ class SubscriptionController extends Controller
         //Stripe Plan Creation
         $stripePlanCreation = $this->stripe->plans->create([
             'amount' => $price,
-            'currency' => 'inr',
-            'interval' => 'month', //  it can be day,week,month or year
+            'currency' => $data['currency'],
+            'interval' => $data['billing_period'], //  it can be day,week,month or year
             'product' => $stripeProduct->id,
         ]);
 

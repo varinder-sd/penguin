@@ -13,6 +13,8 @@ class Plan extends Model
         'slug',
         'stripe_plan',
         'cost',
+		'billing_period',
+		'currency',
         'description',
 		'status'
     ];

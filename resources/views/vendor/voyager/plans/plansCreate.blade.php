@@ -64,18 +64,16 @@
 
 										<div class="form-group">
 											<label for="Price">Price</label>
-											<input type="text" class="form-control" id="Price" name="price" placeholder="Price" value="@isset($plan->price){{$plan->price}}@endisset">
+											<input type="text" class="form-control" id="Price"  placeholder="Price" value="@isset($plan->cost){{$plan->cost}}@endisset" readonly>
 										</div>
 										<div class="form-group">
 											<label for="currency">Currency</label>
-										
-											<select name="currency" class="form-control">
-												<option value="USD" @if(isset($plan->currency) && $plan->currency == 'USD') {{ "selected" }} @endif>USD</option>
-												<option value="INR" @if(isset($plan->currency) && $plan->currency == 'INR') {{ "selected" }} @endif>INR</option>
-											</select>
-											
+										<input type="text" class="form-control"   value="@isset($plan->currency){{$plan->currency}}@endisset" readonly>
 										</div>
-										
+										<div class="form-group">
+											<label for="currency">Billing Period</label>
+										<input type="text" class="form-control"   value="@isset($plan->billing_period){{$plan->billing_period}}@endisset" readonly>
+										</div>
 										<div class="form-group">
 											<label for="description">Description</label>
 											

@@ -20,6 +20,8 @@ class CreatePlansTable extends Migration
             $table->string('slug')->unique();
             $table->string('stripe_plan');
             $table->float('cost');
+			$table->string('billing_period');
+			$table->string('currency');
             $table->text('description')->nullable();
 			$table->enum('status', array('1', '0'));
             $table->timestamps();

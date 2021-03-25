@@ -62,7 +62,7 @@ class PlanController extends Controller
       
         $request->validate([
 			 'name' => 'required',
-					'price' => 'required',
+			'price' => 'required',
 			]);
 			
         $input = $request->except('_token');;
@@ -94,9 +94,8 @@ class PlanController extends Controller
 		
         $plan = Plan::findOrFail($id);
  
-              $request->validate([
-			 'name' => 'required',
-					'price' => 'required',
+            $request->validate([
+				'name' => 'required',
 			]);
  
         $input = $request->all();
